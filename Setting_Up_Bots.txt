@@ -1,0 +1,62 @@
+# Make sure you have Anaconda or Miniconda.
+# For each instance of a bot you wish to run, 
+# download a new instance of hummingbot (see https://docs.hummingbot.io/installation/source/linux/) 
+
+# Check if pip and pre-commit are installed
+
+# Install pip and pre-commit
+sudo apt-get install python3-pip
+pip install pre-commit
+
+# check if anaconda and conda command are installed
+conda --version
+
+# Update conda
+conda update -n base -c defaults conda
+
+# Install Anaconda, check https://repo.anaconda.com/archive/ for the latest Anaconda version to download
+wget https://repo.anaconda.com/archive/Anaconda3-XXXX.XX-Linux-x86_64.sh 
+bash Anaconda3-XXXX.XX-Linux-x86_64.sh
+source .bashrc
+
+# Check if you have the latest gcc version
+gcc --version
+
+# Install GCC, if it is not the latest version
+sudo apt update
+sudo apt install build-essential
+sudo apt-get install manpages-dev
+
+# 1) Clone Hummingbot
+git clone https://github.com/CoinAlpha/hummingbot.git
+
+# 2) Install Hummingbot
+cd hummingbot
+./clean 
+./install
+
+# 3) Activate environment and compile code
+conda activate Hummingbot
+./compile
+
+# 4) Start Hummingbot
+bin/hummingbot.py
+
+# Then you have to open/run each bot in its own screen.
+
+# To view screens available, type:
+$ screen -ls
+
+# To kill a screen, type:
+screen -X -S unique_screen_name quit
+
+# To open a new screen, type:
+screen -S unique_screen_name
+
+# Keep the screens attached, unless you exit the bot.
+# To detach screens, use:
+ctrl+a d
+
+# Find aws instance information (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html#connection-prereqs-get-info-about-instance)
+# ssh into aws from a linux terminal (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/WSL.html)
+sudo ssh -i /path/my-key-pair.pem ec2-user@2001:db8:1234:1a00:9691:9503:25ad:1761
