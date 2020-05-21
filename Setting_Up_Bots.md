@@ -11,7 +11,18 @@
 ### dowload and install developer version of hummingbot at https://docs.hummingbot.io/installation/source/linux/
 ### dowload and install docker version of hummingbot (Best way to run Hummingbot is in Docker) at see https://docs.hummingbot.io/installation/source/linux/
 
-### Check if pip are installed
+# INSTALL GCC
+============================================================================
+### Check if you have the latest gcc version
+`gcc --version`
+### If you dont have the latest gcc version, do the following:
+`$ sudo apt update`
+
+`$ sudo apt install build-essential`
+
+`$ sudo apt-get install manpages-dev`
+
+### Check if pip is installed
 
 `$ pip --version`
 
@@ -19,7 +30,7 @@
 
 `$ sudo apt-get install python3-pip`
 
-`$ pip install pre-commit`
+`$ pip3 install pre-commit`
 
 # INSTALL ANACONDA
 ============================================================================
@@ -36,17 +47,6 @@
 ### Update conda
 `$ conda update -n base -c defaults conda`
 
-
-# INSTALL GCC
-============================================================================
-### Check if you have the latest gcc version
-`gcc --version`
-### If you dont have the latest gcc version, do the following:
-`$ sudo apt update`
-
-`$ sudo apt install build-essential`
-
-`$ sudo apt-get install manpages-dev`
 
 # INSTALL HUMMINGBOT AND DOCKER
 ============================================================================
@@ -65,17 +65,19 @@
 ### 5) Change permissions for docker (optional). Allow docker commands without requiring sudo prefix
 `$ sudo usermod -a -G docker $USER `
 
-### 6) Close terminal so Docker can install
+### 6) Close your  so Docker can install
 `$ exit`
 
-### 7) Download Hummingbot install, start, and update script
+### 7) Log back into your AWS instance
+
+### 8) Download Hummingbot install, start, and update script
 `$ wget https://raw.githubusercontent.com/CoinAlpha/hummingbot/development/installation/docker-commands/create.sh`
 
 `$ wget https://raw.githubusercontent.com/CoinAlpha/hummingbot/development/installation/docker-commands/start.sh`
 
 `$ wget https://raw.githubusercontent.com/CoinAlpha/hummingbot/development/installation/docker-commands/update.sh`
 
-### 8) Enable script permissions so you can run the .sh execution files.
+### 9) Enable script permissions so you can run the .sh execution files.
 `$ chmod a+x *.sh`
 
 # Create each bot instance in a seperate screen to leave it running when logged out of aws.
