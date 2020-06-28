@@ -7,9 +7,8 @@
 
 `$ sudo ssh -i /path/my-key-pair.pem ubuntu@PUBLIC_DNS`
 
-### For each instance of a bot you wish to run, 
-### dowload and install developer version of hummingbot at https://docs.hummingbot.io/installation/source/linux/
-### dowload and install docker version of hummingbot (Best way to run Hummingbot is in Docker) at see https://docs.hummingbot.io/installation/source/linux/
+### dowload and install developer version of hummingbot at https://docs.hummingbot.io/installation/source/linux/ (Download for each instance)
+### dowload and install docker version of hummingbot (Best way to run Hummingbot is in Docker) at see https://docs.hummingbot.io/installation/source/linux/ (No need to download for each instance)
 
 # INSTALL GCC
 ============================================================================
@@ -62,41 +61,50 @@
 ### 4) Start and Automate Docker
 `$ sudo systemctl start docker && sudo systemctl enable docker `
 
-### 5) Change permissions for docker (optional). Allow docker commands without requiring sudo prefix
+### 5) Change permissions for docker (optional). Allow docker commands without requiring sudo prefix. $USER is usually ubuntu, or your username on your machine.
 `$ sudo usermod -a -G docker $USER `
 
 ### 6) Close your  so Docker can install
 `$ exit`
 
-### 7) Log back into your AWS instance
+### 7) Log back into your AWS instance and then check it Docker was successfully installed
+> `$ sudo ssh -i /path/my-key-pair.pem ubuntu@PUBLIC_DNS`
+> `$ docker --version`
 
 ### 8) Download Hummingbot install, start, and update script
-`$ wget https://raw.githubusercontent.com/CoinAlpha/hummingbot/development/installation/docker-commands/create.sh`
+> `wget https://raw.githubusercontent.com/CoinAlpha/hummingbot/development/installation/docker-commands/create.sh`
 
-`$ wget https://raw.githubusercontent.com/CoinAlpha/hummingbot/development/installation/docker-commands/start.sh`
+> `wget https://raw.githubusercontent.com/CoinAlpha/hummingbot/development/installation/docker-commands/start.sh`
 
-`$ wget https://raw.githubusercontent.com/CoinAlpha/hummingbot/development/installation/docker-commands/update.sh`
+> `wget https://raw.githubusercontent.com/CoinAlpha/hummingbot/development/installation/docker-commands/update.sh`
 
 ### 9) Enable script permissions so you can run the .sh execution files.
-`$ chmod a+x *.sh`
+> `chmod a+x *.sh`
 
 # Create each bot instance in a seperate screen to leave it running when logged out of aws.
 ============================================================================
 ### View screens available, dettached or attached:
-`$ screen -ls`
+> `screen -ls`
 
 ### Open a new screen and name it, e.g. "pmm_binance_ethbtc_1"
-`screen -S unique_name`
+> `screen -S UNIQUE_NAME`
 
 ### To kill a screen, type:
-`screen -X -S unique_name quit`
+> `screen -X -S UNIQUE_NAME quit`
 
 ### Keep the screens attached, unless you exit the bot. To detach screens, use:
-`ctrl+a d`
+> `ctrl+a d`
+
+### To reattach to a screen 
+> `screen -r SCREEN_NAME`
+
+### To rename a screen to a NEW_NAME while attached in the screen
+> `: sessionname NEW_NAME`
+
 # Creating and restarting a bot
 ============================================================================
-### Once in a seperate screen, create a new bot instance. This will create a Docker container, give it a unique_name (can be the same name as the screen name). It will also create a unique_name_files to contain you logs, data and config files.
-`$ ./create.sh`
+### Once in a seperate screen, create a new bot instance. This will create a Docker container, give it a UNIQUE_NAME (can be the same name as the screen name). It will also create a UNIQUE_NAME_files to contain you logs, data and config files.
+> `./create.sh`
 
 ### Go through the bot configuration, create or import a configuration file and run it using these Hummingbot commands: 
 > `create`
@@ -118,3 +126,4 @@
 `$ ./start.sh`
 ### Check Docker containers
 `docker container ls`
+### 
